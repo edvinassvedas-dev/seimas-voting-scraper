@@ -1,4 +1,5 @@
 # Seimas Voting Scraper
+
 ![App Interface](images/screenshot.png)
 
 A Python desktop application for scraping, structuring, and managing selected parliamentary voting records from the Lithuanian Seimas public API. Provides a GUI front-end for entering data into Google Sheets. Intended to be used with Looker Studio for reporting.
@@ -12,7 +13,7 @@ Built to serve a personal need — structured data entry from a public governmen
 
 ## Features
 
-- **API data fetch** — retrieves individual voting records from the Seimas public API by vote ID; auto-populates the vote name if available in the XML response
+- **API data fetch** — retrieves individual voting records from the Seimas public API by voting ID
 - **Preview before insert** — results are displayed in a table for review before committing to the database
 - **Duplicate detection** — warns before inserting a vote ID that already exists in the database
 - **Database summary** — shows record count per vote ID with vote name and date, loaded on startup
