@@ -110,4 +110,4 @@ To remove a voting records, select it in the Database Summary table and click **
 
 ## License
 
-Personal project. Not intended for commercial use or redistribution.
+MIT
