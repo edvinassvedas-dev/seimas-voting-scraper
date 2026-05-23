@@ -4,8 +4,10 @@ A Python desktop app for scraping, structuring, and managing selected parliament
 
 Built to serve a personal need. Shared here in case it inspires similar civic data projects.
 
-<img src="images/main.png" height="300">
-<img src="images/preview.png" height="300">
+<p align="left">
+  <img src="images/main.png" height="300">
+  <img src="images/preview.png" height="300">
+</p>
 
 ## Requirements
 
