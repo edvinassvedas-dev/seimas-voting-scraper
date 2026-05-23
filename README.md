@@ -1,79 +1,43 @@
 # Seimas Voting Scraper
 
-![App Interface](images/screenshot.png)
+A Python desktop app for scraping, structuring, and managing selected parliamentary voting records from the Lithuanian Seimas public API. Provides a Tkinter GUI for entering data into Google Sheets, intended for use with Data Studio for reporting.
 
-A Python desktop application for scraping, structuring, and managing selected parliamentary voting records from the Lithuanian Seimas public API. Provides a GUI front-end for entering data into Google Sheets. Intended to be used with Looker Studio for reporting.
+Built to serve a personal need. Shared here in case it inspires similar civic data projects.
 
----
-
-## Overview
-
-Built to serve a personal need — structured data entry from a public government API into a Google Sheets database. Shared here in case it inspires similar civic data projects. The app fetches voting records for a given voting ID, displays them for review, and inserts them into a three-sheet Google Sheets structure alongside the vote name and source URL.
+<img src="images/main.png" height="300">
+<img src="images/preview.png" height="300">
 
 ## Requirements
 
 ```
 Python 3.9+
-FreeSimpleGUI
 gspread
 google-auth
 requests
 pandas
 ```
+
+
+
 ---
 
 ## API Note
 
-The API (`apps.lrs.lt`) may be inaccessible from non-Lithuanian IP addresses. If requests time out or return connection errors, try connecting via a Lithuanian VPN.
+The API (`apps.lrs.lt`) may be inaccessible from non-Lithuanian IP addresses.
 
 ---
 
 ## Google Sheets Setup
 
-The app writes to a spreadsheet named `your_spreadsheet` across three sheets:
-
-| Sheet | Index | Contents |
-|---|---|---|
-| Sheet 1 | 0 | Voting records (voting ID, date, member, fraction, result) |
-| Sheet 2 | 1 | Vote names (voting ID, voting name) |
-| Sheet 3 | 2 | Vote URLs (voting ID, voting URL) |
-
 1. Create a Google Cloud project and enable the Sheets and Drive APIs
 2. Create a service account and download the JSON credentials file
 3. Share the spreadsheet with the service account email address
-4. Update `CREDENTIALS_PATH` in the script:
+4. Update the config constants near the top of **`sheets.py`**:
 
-```python
-CREDENTIALS_PATH = '/path/to/your/credentials.json'
-SPREADSHEET_NAME = 'your_spreadsheet'  # rename to whatever works for you
-```
----
+Exact header rows are expected. The schema is verified at startup:
 
-## Data Structure
-
-**Sheet 1 — Voting records**
-
-| Field | Description |
-|---|---|
-| `voting` | Vote ID from the Seimas API |
-| `date` | Date of the vote (YYYY-MM-DD) |
-| `member` | MP full name |
-| `fraction` | Parliamentary fraction/party |
-| `result` | Vote cast (e.g. už / prieš / susilaikė) |
-
-**Sheet 2 — Vote names**
-
-| Field | Description |
-|---|---|
-| `voting` | Voting ID |
-| `voting_name` | Descriptive name of the vote |
-
-**Sheet 3 — Vote URLs**
-
-| Field | Description |
-|---|---|
-| `voting` | Voting ID |
-| `voting_url` | Source URL for reference |
+- **Sheet 1** (fact table): `voting`, `date`, `member`, `fraction`, `result`
+- **Sheet 2** (dimensions): `voting`, `term`, `votingname`, `votingurl`, `tags`
 
 ---
 
